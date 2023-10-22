@@ -24,7 +24,7 @@ export default function Log() {
           <Field name="name">
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.name && form.touched.name}>
-                <FormLabel>First name</FormLabel>
+                <FormLabel>Tell us about your day:</FormLabel>
                 <Input {...field} placeholder="Name" />
                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
               </FormControl>
