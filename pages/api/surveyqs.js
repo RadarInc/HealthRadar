@@ -20,10 +20,6 @@ const data = {
         {
             "role": "system",
             "content": `${prompt} "${journalEntry}"`
-        },
-        {
-            "role": "user",
-            "content": ""
         }
     ]
 };
@@ -44,7 +40,13 @@ axios.post(url, data, {headers: headers})
 
     // Print the JSON array of questions
     console.log(JSON.stringify(questionsJSON));
+    print(questionsJSON);
+
 })
 .catch(error => {
     console.error(error);
 });
+
+export function post(arg0) {
+  throw new Error("Function not implemented.");
+}
