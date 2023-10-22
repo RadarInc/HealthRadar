@@ -72,11 +72,12 @@ export default function Home() {
         </Center> */}
 
         <div>
-          <Center>
+          <Center margin="50">
             <Calendar
               onChange={() => {}}
               value={new Date()}
               onClickDay={clickDay}
+              style={{ border: "none" }} // Apply custom style to remove the border
             />
           </Center>
 
