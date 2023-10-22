@@ -15,7 +15,7 @@ export default function Home() {
           <Image src="/logo.png" alt="" width={500} height={500} />
         </div>
 
-        <Link href="/log">Log</Link>
+        {/* <Link href="/log">Log</Link> */}
 
         {/* <Center>
           <Box>
