@@ -8,11 +8,16 @@ import {
   Center,
   Textarea,
   useToast,
+  Text,
+  CircularProgress,
+  CircularProgressLabel,
+  Flex, // Import Flex from Chakra UI
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import { useState } from "react";
-import {json} from "stream/consumers";
+import { json } from "stream/consumers";
+
 export default function Log() {
   const [data, setData] = useState([]);
   const toast = useToast();
@@ -20,7 +25,6 @@ export default function Log() {
   return (
     <>
       <div>
-        {" "}
         <Center minH="100vh">
           <Formik
             initialValues={{ name: "" }}
@@ -28,10 +32,10 @@ export default function Log() {
               setTimeout(() => {
                 actions.setSubmitting(false);
 
-                // Send a post request to backend
+                // Send a post request to the backend
                 axios
                   .post("http://127.0.0.1:5000/", {
-                    "message": values.name,
+                    message: values.name,
                   })
                   .then((response) => {
                     setData(response.data);
@@ -59,11 +63,8 @@ export default function Log() {
                       <FormControl
                         isInvalid={form.errors.name && form.touched.name}
                       >
-                        <Center>
-                          <FormLabel fontSize="3xl">
-                            Tell us about your day:
-                          </FormLabel>
-                        </Center>
+                        <Center></Center>
+                        <FormLabel fontSize="3xl">Tell us about your day: </FormLabel>
                         <Textarea
                           {...field}
                           placeholder="Journal here..."
@@ -89,8 +90,21 @@ export default function Log() {
             )}
           </Formik>
         </Center>
-        {JSON.stringify(data)}
       </div>
+
+      <Flex justifyContent="center">
+        {data['scores']?.map((item, index) => (
+          <div key={index} style={{ margin: '0 1rem' }}>
+            <CircularProgress value={item * 100} size="12rem" padding="3rem">
+              <CircularProgressLabel>
+                <Text fontSize="2rem">
+                  {data['labels'][index].charAt(0).toUpperCase() + data['labels'][index].slice(1)}
+                </Text>
+              </CircularProgressLabel>
+            </CircularProgress>
+          </div>
+        ))}
+      </Flex>
     </>
   );
 }
