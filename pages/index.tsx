@@ -5,8 +5,9 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 export default function Home() {
-  const daysInMonth = new Date(2023, 10, 0).getDate();
-  const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+  const clickDay = (value: Date) => {
+    console.log(value.getDate());
+  }
 
   return (
     <main>
@@ -50,7 +51,9 @@ export default function Home() {
           </Box>
         </Center> */}
 
-        <Calendar onChange={() => {}} value={new Date()} />
+        <Center>
+          <Calendar onChange={() => {}} value={new Date()} onClickDay={clickDay}/>
+        </Center>
       </div>
     </main>
   );
