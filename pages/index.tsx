@@ -3,11 +3,32 @@ import Link from "next/link";
 import { Box, Center, Heading, Grid, GridItem } from "@chakra-ui/react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const [surveyQuestions, setSurveyQuestions] = useState([]);
+  const router = useRouter();
+
   const clickDay = (value: Date) => {
     console.log(value.getDate());
-  }
+
+    router.push("/log");
+  };
+
+  useEffect(() => {
+    async function fetchSurveyQuestions() {
+      // const response = await fetch("/surveyqs.js");
+      // const data = await response.json();
+
+      const data = "";
+
+      console.log(data);
+      // setSurveyQuestions(data);
+    }
+
+    fetchSurveyQuestions();
+  }, []);
 
   return (
     <main>
@@ -16,9 +37,8 @@ export default function Home() {
           <Image src="/logo.png" alt="" width={500} height={500} />
         </div>
 
-        {/* <Link href="/log">Log</Link> */}
-
-        {/* <Center>
+        {/* <Link href="/log">Log</Link> */
+        /* <Center>
           <Box>
             <Center>
               <Heading size="md">October 2023</Heading>
@@ -51,9 +71,17 @@ export default function Home() {
           </Box>
         </Center> */}
 
-        <Center>
-          <Calendar onChange={() => {}} value={new Date()} onClickDay={clickDay}/>
-        </Center>
+        <div>
+          <Center>
+            <Calendar
+              onChange={() => {}}
+              value={new Date()}
+              onClickDay={clickDay}
+            />
+          </Center>
+
+          {/* <div>{surveyQuestions.map((question) => ({ question }))}</div> */}
+        </div>
       </div>
     </main>
   );
