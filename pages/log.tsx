@@ -12,7 +12,7 @@ import {
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import { useState } from "react";
-
+import {json} from "stream/consumers";
 export default function Log() {
   const [data, setData] = useState([]);
   const toast = useToast();
@@ -26,13 +26,12 @@ export default function Log() {
             initialValues={{ name: "" }}
             onSubmit={(values, actions) => {
               setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
                 actions.setSubmitting(false);
 
                 // Send a post request to backend
                 axios
-                  .post("/api/v1/users", {
-                    namemess: "Fred",
+                  .post("http://127.0.0.1:5000/", {
+                    "message": values.name,
                   })
                   .then((response) => {
                     setData(response.data);
@@ -90,7 +89,7 @@ export default function Log() {
             )}
           </Formik>
         </Center>
-        {data}
+        {JSON.stringify(data)}
       </div>
     </>
   );
